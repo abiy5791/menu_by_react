@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCategory, updateCategory } from "./api";
 import { useNavigate } from "react-router";
+import InputForm from "./InputForm";
+import { Link } from "react-router-dom";
 
 const CategoryUpdate = () => {
   const navigate = useNavigate();
@@ -34,36 +36,25 @@ const CategoryUpdate = () => {
 
   return (
     <div>
+      <Link to={`/categories`}>
+        <button type="button" className="btn">
+          <b>Back</b>
+        </button>
+      </Link>
       <h2>Edit Category</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="cat_food_name"
-            value={categoryData.cat_food_name}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
-            name="cat_food_description"
-            value={categoryData.cat_food_description}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Image URL:</label>
-          <input
-            type="text"
-            name="cat_food_image"
-            value={categoryData.cat_food_image}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Update</button>
-      </form>
+      <InputForm
+        handlesubmit={handleSubmit}
+        namevalue={categoryData.cat_food_name}
+        handlechange={handleChange}
+        descriptionvalue={categoryData.cat_food_description}
+        image_or_pricevalue={categoryData.cat_food_image}
+        number_or_text={"text"}
+        create_or_update={"Update"}
+        labelimage_or_price={"ImageURL"}
+        namefield={"cat_food_name"}
+        descfield={"cat_food_description"}
+        image_or_pricefield={"cat_food_image"}
+      />
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchSubCategory, updateSubcategory } from "./api";
 import { useNavigate } from "react-router";
+import InputForm from "./InputForm";
+import { Link } from "react-router-dom";
 
 const SubcategoryUpdate = () => {
   const navigate = useNavigate();
@@ -34,36 +36,25 @@ const SubcategoryUpdate = () => {
 
   return (
     <div>
+      <Link to={`/categories`}>
+        <button type="button" className="btn">
+          <b>Back</b>
+        </button>
+      </Link>
       <h2>Edit Subcategory</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="sub_food_name"
-            value={subcategoryData.sub_food_name}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
-            name="sub_food_description"
-            value={subcategoryData.sub_food_description}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            type="number"
-            name="sub_food_price"
-            value={subcategoryData.sub_food_price}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Update</button>
-      </form>
+      <InputForm
+        handlesubmit={handleSubmit}
+        handlechange={handleChange}
+        namevalue={subcategoryData.sub_food_name}
+        descriptionvalue={subcategoryData.sub_food_description}
+        image_or_pricevalue={subcategoryData.sub_food_price}
+        number_or_text={"number"}
+        labelimage_or_price={"Price"}
+        namefield={"sub_food_name"}
+        descfield={"sub_food_description"}
+        image_or_pricefield={"sub_food_price"}
+        create_or_update={"Update"}
+      />
     </div>
   );
 };

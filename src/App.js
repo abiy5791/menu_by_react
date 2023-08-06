@@ -1,5 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import CategoryList from "./components/CategoryList";
 import CategoryCreate from "./components/CategoryCreate";
 import CategoryUpdate from "./components/CategoryUpdate";
@@ -8,18 +12,39 @@ import SubcategoryList from "./components/SubcategoryList";
 import SubcategoryCreate from "./components/SubcategoryCreate";
 import SubcategoryUpdate from "./components/SubcategoryUpdate";
 import SubcategoryDelete from "./components/SubcategoryDelete";
-
+import React, { useState, useEffect } from "react";
+import Alert from "./components/Alert";
 const App = () => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  useEffect(() => {
+    // Add an event listener to update the online status
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    // Clean up the event listeners when the component unmounts
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
   return (
     <Router>
-      <div className="container">
+      {/* <div className="container">
         <Link to="/categories" className="navbar-brand">
           Home
         </Link>
-      </div>
+      </div> */}
+      {!isOnline && (
+        <Alert AlertMessage={<b>Oops! No internet connection.</b>}></Alert>
+      )}
 
       <div className="container">
         <Routes>
+          <Route path="/" element={<Navigate to="/categories" />} />
+
           <Route
             path="/categories/:category_id/update"
             element={<CategoryUpdate />}

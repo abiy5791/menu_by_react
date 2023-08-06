@@ -14,7 +14,7 @@ const SubcategoryDelete = () => {
 
   return (
     <div>
-      <h2>Confirm Delete Subcategory</h2>
+      <h5>Confirm Delete Subcategory</h5>
       <button onClick={handleDelete} className="btn btn-danger">
         Delete
       </button>

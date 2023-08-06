@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createCategory } from "./api";
+import InputForm from "./InputForm";
+import { Link } from "react-router-dom";
 
 const CategoryCreate = () => {
   const navigate = useNavigate();
@@ -28,36 +30,25 @@ const CategoryCreate = () => {
 
   return (
     <div>
+      <Link to={`/categories`}>
+        <button type="button" className="btn">
+          <b>Back</b>
+        </button>
+      </Link>
       <h2>Create Category</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="cat_food_name"
-            value={categoryData.cat_food_name}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
-            name="cat_food_description"
-            value={categoryData.cat_food_description}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Image URL:</label>
-          <input
-            type="text"
-            name="cat_food_image"
-            value={categoryData.cat_food_image}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Create</button>
-      </form>
+      <InputForm
+        handlesubmit={handleSubmit}
+        namevalue={categoryData.cat_food_name}
+        handlechange={handleChange}
+        descriptionvalue={categoryData.cat_food_description}
+        image_or_pricevalue={categoryData.cat_food_image}
+        number_or_text={"text"}
+        labelimage_or_price={"ImageURL"}
+        namefield={"cat_food_name"}
+        descfield={"cat_food_description"}
+        image_or_pricefield={"cat_food_image"}
+        create_or_update={"Create"}
+      />
     </div>
   );
 };

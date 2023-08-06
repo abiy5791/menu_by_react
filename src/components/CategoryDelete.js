@@ -14,7 +14,7 @@ const CategoryDelete = () => {
 
   return (
     <div>
-      <h2>Confirm Delete Category</h2>
+      <h5>Confirm Delete Category</h5>
       <button onClick={handleDelete} className="btn btn-danger">
         Delete
       </button>
